@@ -3,7 +3,7 @@
  * and modified for my needs.
  **/
 // Returns an array of dates between the two dates
-const getDates = function(startDate, endDate) {
+exports.getDates = function(startDate, endDate) {
   let dates = [],
     currentDate = startDate,
     addDays = function(days) {
@@ -23,9 +23,3 @@ const getDates = function(startDate, endDate) {
   }
   return dates;
 };
-
-// Usage
-const dates = getDates(new Date(2018, 7, 22), new Date(2018, 7, 31));
-dates.forEach(function(date) {
-  console.log(date);
-});

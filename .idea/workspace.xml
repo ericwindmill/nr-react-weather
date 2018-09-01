@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cb4cfc8-35fe-4096-82e3-f232b30bb4d4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/utils/date_utils.js" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/__tests__/date_utils.test.js" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change beforePath="$PROJECT_DIR$/src/blocs/weather_bloc.js" afterPath="$PROJECT_DIR$/src/blocs/weather_bloc.js" />
-      <change beforePath="$PROJECT_DIR$/src/models/city.js" afterPath="$PROJECT_DIR$/src/models/city.js" />
-      <change beforePath="$PROJECT_DIR$/src/services/weather_services.js" afterPath="$PROJECT_DIR$/src/services/weather_services.js" />
+      <change beforePath="$PROJECT_DIR$/src/utils/date_utils.js" afterPath="$PROJECT_DIR$/src/utils/date_utils.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,11 +20,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.43466222">
       <split-first>
         <leaf>
-          <file leaf-file-name="weather_services.test.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/__tests__/weather_services.test.js">
+          <file leaf-file-name="date_utils.test.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/__tests__/date_utils.test.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="312">
-                  <caret line="13" column="19" lean-forward="true" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+                <state relative-caret-position="144">
+                  <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
                   <folding />
                 </state>
               </provider>
@@ -40,8 +37,8 @@
           <file leaf-file-name="date_utils.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/utils/date_utils.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="384">
-                  <caret line="16" column="25" lean-forward="false" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+                <state relative-caret-position="600">
+                  <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -67,6 +64,7 @@
         <option value="$PROJECT_DIR$/src/models/city.js" />
         <option value="$PROJECT_DIR$/src/blocs/weather_bloc.js" />
         <option value="$PROJECT_DIR$/src/utils/date_utils.js" />
+        <option value="$PROJECT_DIR$/src/__tests__/date_utils.test.js" />
       </list>
     </option>
   </component>
@@ -122,6 +120,12 @@
               <item name="weather" type="b2602c69:ProjectViewProjectNode" />
               <item name="weather" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="__tests__" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="weather" type="b2602c69:ProjectViewProjectNode" />
+              <item name="weather" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -165,12 +169,12 @@
       <updated>1535757091727</updated>
       <workItem from="1535757093920" duration="323000" />
       <workItem from="1535757764376" duration="208000" />
-      <workItem from="1535812754734" duration="12536000" />
+      <workItem from="1535812754734" duration="12840000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13067000" />
+    <option name="totallyTimeSpent" value="13371000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-480" y="-1080" width="1920" height="1080" extended-state="0" />
@@ -307,14 +311,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/__tests__/weather_services.test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="13" column="19" lean-forward="true" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/services/weather_services.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="227">
@@ -350,10 +346,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/date_utils.js">
+    <entry file="file://$PROJECT_DIR$/src/__tests__/weather_services.test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
-          <caret line="16" column="25" lean-forward="false" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/date_utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/__tests__/date_utils.test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
           <folding />
         </state>
       </provider>
