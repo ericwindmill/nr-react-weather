@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import WeatherBloc from "./blocs/weather_bloc";
+import CityTabs from "./components/city_tabs";
+import * as vars from "./variables/general";
 
 class App extends Component {
   constructor(props) {
@@ -21,13 +22,7 @@ class App extends Component {
       <h1>Loading</h1>
     ) : (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <CityTabs cities={vars.cities} />
       </div>
     );
 

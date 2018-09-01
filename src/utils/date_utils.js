@@ -3,7 +3,7 @@
  * and modified for my needs.
  **/
 // Returns an array of dates between the two dates
-module.exports.getDates = function(startDate, endDate) {
+export const getDates = function(startDate, endDate) {
   let dates = [],
     currentDate = startDate,
     addDays = function(days) {
@@ -22,4 +22,9 @@ module.exports.getDates = function(startDate, endDate) {
     currentDate = addDays.call(currentDate, 1);
   }
   return dates;
+};
+
+export const oneWeekAgo = () => {
+  const today = new Date();
+  return new today.setDate(today.getDate() - 7);
 };

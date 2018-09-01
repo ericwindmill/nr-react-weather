@@ -1,8 +1,3 @@
-// For Today, For the Prev Week and For Next Week:
-// temperature data
-// C and F
-// daily mean high and low temps
-// condition with icons for bonus
 export default class CityData {
   constructor(title, data) {
     this.title = title;

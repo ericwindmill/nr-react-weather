@@ -1,4 +1,5 @@
-import util from "../utils/date_utils";
+import * as util from "../utils/date_utils";
+import { cities } from "../variables/general";
 
 const options = {
   host: "https://api.apixu.com",
@@ -8,21 +9,13 @@ const options = {
   method: "GET",
 };
 
-const cities = [
-  "San Francisco",
-  "Amsterdam",
-  "Oakland",
-  "Rome",
-  "Cleveland",
-  "Tel Aviv",
-  "New York City",
-  "Murmansk",
-  "Istanbul",
-];
-
 const _fetch = async query => {
   let url = options.host + query;
-  return fetch(url).then(response => response.json());
+  return fetch(url).then(response =>
+    response.json().catch(e => {
+      throw new Error(e);
+    }),
+  );
 };
 
 export const getCurrentWeatherByCity = async function getWeatherByCity(city) {

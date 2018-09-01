@@ -1,0 +1,26 @@
+.tabs-root {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tab-wrapper {
+  display: inline-block;
+  min-height: unset !important;
+  min-width: unset !important;
+  height: unset !important;
+  width: unset !important;
+  max-height: unset !important;
+  max-width: unset !important;
+}
+
+.tab-root-button {
+  min-height: unset !important;
+  min-width: unset !important;
+  height: unset !important;
+  width: unset !important;
+  max-height: unset !important;
+  max-width: unset !important;
+  padding: 10px 15px;
+  border-radius: 3px;
+  line-height: 48px;
+}
