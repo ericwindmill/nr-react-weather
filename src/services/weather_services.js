@@ -1,3 +1,5 @@
+import util from "../utils/date_utils";
+
 const options = {
   host: "https://api.apixu.com",
   currentWeatherPath: "/v1/current.json?key=cacdf29dc2be47d484a105606152306&q=",
@@ -52,6 +54,11 @@ exports.getHistoryForCity = async function getHistoryForCity(city, startDate) {
   if (parseInt(startDate.split("-")[0]) < 2015) {
     throw new Error("The oldest data available is from 2015");
   }
-  let query = options.historyPath + `${city}&days=${startDate}`;
-  return _fetch(query);
+  const dateRange = util.getDates(startDate, new Date.now());
+  const results = [];
+  for (let date in dateRange) {
+    let query = options.historyPath + `${city}&days=${dateRange[date]}`;
+    results.push(_fetch(query));
+  }
+  return results;
 };

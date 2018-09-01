@@ -8,7 +8,9 @@ class can be reused by many different components/apps/etc.
  */
 
 import "../services/weather_services";
+import utils from '../utils/date_utils';
 import City from '../models/city';
+
 
 export default class WeatherBloc {
   constructor(services) {
@@ -17,10 +19,18 @@ export default class WeatherBloc {
 
   createCityModel = async city => {
     const json = await this.services.getCurrentWeatherByCity(city);
-    return new City(json);
+    return City.createCityData(json);
   };
 
-  createDateRange = (startDate, endDate) => {
+  createCityModelWithHistory = async city => {
+    // This is hardcoded -- a better way would be to pass in a startDate
+    // However, the specs said we want to look at exactly one week
+    const startDate = new Date.now().setDate(new Date.now() - 7);
+    const jsonArr = await this.services.getHistoryForCity(city, startDate);
+    return City.createCityDataWithHistory(jsonArr)
+  }
 
+  createDateRange = (startDate, endDate) => {
+    return utils.getDates(startDate, endDate);
   }
 }
