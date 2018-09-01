@@ -31,7 +31,8 @@ exports.getCurrentWeatherByCity = async function getWeatherByCity(city) {
 exports.getCurrentWeatherForAllCities = async function getWeatherForAllCities() {
   const allCitiesWeather = {};
   for (let city in cities) {
-    allCitiesWeather[cities[city]] = await _fetch(cities[city]);
+    let query = options.currentWeatherPath + cities[city];
+    allCitiesWeather[cities[city]] = await _fetch(query);
   }
   return allCitiesWeather;
 };
