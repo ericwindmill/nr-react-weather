@@ -10,13 +10,13 @@ const options = {
 
 const cities = [
   "San Francisco",
-  "Ansterdam",
+  "Amsterdam",
   "Oakland",
   "Rome",
   "Cleveland",
   "Tel Aviv",
   "New York City",
-  "Murkmansk",
+  "Murmansk",
   "Istanbul",
 ];
 
@@ -25,12 +25,12 @@ const _fetch = async query => {
   return fetch(url).then(response => response.json());
 };
 
-exports.getCurrentWeatherByCity = async function getWeatherByCity(city) {
+export const getCurrentWeatherByCity = async function getWeatherByCity(city) {
   let path = options.currentWeatherPath + city;
   return _fetch(path);
 };
 
-exports.getCurrentWeatherForAllCities = async function getWeatherForAllCities() {
+export const getCurrentWeatherForAllCities = async function getWeatherForAllCities() {
   const allCitiesWeather = {};
   for (let city in cities) {
     let query = options.currentWeatherPath + cities[city];
@@ -39,7 +39,7 @@ exports.getCurrentWeatherForAllCities = async function getWeatherForAllCities() 
   return allCitiesWeather;
 };
 
-exports.getForecastForCity = async function getForecastForCity(
+export const getForecastForCity = async function getForecastForCity(
   city,
   forecastDays,
 ) {
@@ -50,7 +50,10 @@ exports.getForecastForCity = async function getForecastForCity(
   return _fetch(query);
 };
 
-exports.getHistoryForCity = async function getHistoryForCity(city, startDate) {
+export const getHistoryForCity = async function getHistoryForCity(
+  city,
+  startDate,
+) {
   if (parseInt(startDate.split("-")[0]) < 2015) {
     throw new Error("The oldest data available is from 2015");
   }

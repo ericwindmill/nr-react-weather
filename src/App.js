@@ -1,14 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import WeatherBloc from "./blocs/weather_bloc";
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.weatherBloc = new WeatherBloc();
+  }
+
+  async componentDidMount() {
+    let data = await this.weatherBloc.fetchAllCitiesData();
+    this.props.appState.updateAppState(data);
+    // Tell react to re-render;
+    this.forceUpdate();
   }
 
   render() {
-    return (
+    let isLoading = this.props.appState.isLoading ? (
+      <h1>Loading</h1>
+    ) : (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -19,6 +30,8 @@ class App extends Component {
         </p>
       </div>
     );
+
+    return isLoading;
   }
 }
 

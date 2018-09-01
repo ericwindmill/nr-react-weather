@@ -5,7 +5,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import AppState from './models/app_state';
 
-
+// Dep injection
 let appState = new AppState();
-ReactDOM.render(<App state={appState} />, document.getElementById('root'));
+ReactDOM.render(<App appState={appState} />, document.getElementById('root'));
 registerServiceWorker();

@@ -3,49 +3,9 @@
 // C and F
 // daily mean high and low temps
 // condition with icons for bonus
-
-/*
- CityData State object sample:
- {
-      city: object.location.name,
-      currentTempC: object.current["temp_c"],
-      currentTempF: object.current["temp_f"],
-      condition: object.current.condition.text,
-      conditionIcon: object.current.condition.icon,
-      forecast: [
-        date: {
-          maxC: 23.8,
-          maxT: 74.8,
-          minC: 16.1,
-          minF: 61.0,
-          avgC: 19.5,
-          avgF: 67.0,
-          condition: "Rain",
-          conditionIcon: "url"
-        },
-        // .. all the dates
-      ],
-      history: [
-        {
-          date: {
-            maxC: 23.8,
-            maxT: 74.8,
-            minC: 16.1,
-            minF: 61.0,
-            avgC: 19.5,
-            avgF: 67.0,
-            condition: "Rain",
-            conditionIcon: "url"
-          },
-        },
-        // .. all the dates
-      ]
- }
-*/
-
-class CityData {
+export default class CityData {
   constructor(title, data) {
-    this.title = title
+    this.title = title;
     this.state = data;
   }
 
@@ -56,10 +16,9 @@ class CityData {
   //
   // In this sample project, this may be over kill,
   // but i'd argue that its a good idea for a "real" project.
-  static createCityData = json => {
-    let object = JSON.parse(json);
+  static createCityData = object => {
     let cityData = {
-      city: object.location.name,
+      city: object.location["name"],
       currentTempC: object.current["temp_c"],
       currentTempF: object.current["temp_f"],
       condition: object.current.condition.text,

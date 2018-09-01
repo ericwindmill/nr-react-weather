@@ -3,7 +3,7 @@
  * and modified for my needs.
  **/
 // Returns an array of dates between the two dates
-exports.getDates = function(startDate, endDate) {
+module.exports.getDates = function(startDate, endDate) {
   let dates = [],
     currentDate = startDate,
     addDays = function(days) {

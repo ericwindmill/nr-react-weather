@@ -5,32 +5,43 @@ weather related data/logic will call out to this object.
 
 The goal of a Bloc is similar to the goal of a UI Component. This
 class can be reused by many different components/apps/etc.
+
+// Notes about why services and blocs are separate.
  */
 
-import "../services/weather_services";
-import utils from '../utils/date_utils';
-import City from '../models/city';
-
+import {
+  getCurrentWeatherForAllCities,
+  getHistoryForCity,
+  getCurrentWeatherByCity,
+  getForecastForCity,
+} from "../services/weather_services";
+import utils from "../utils/date_utils";
+import CityData from "../models/city";
 
 export default class WeatherBloc {
-  constructor(services) {
-    this.services = services;
-  }
-
-  createCityModel = async city => {
-    const json = await this.services.getCurrentWeatherByCity(city);
-    return City.createCityData(json);
+  fetchSingleCityData = async city => {
+    const json = await getCurrentWeatherByCity(city);
+    return CityData.createCityData(json);
   };
 
-  createCityModelWithHistory = async city => {
+  fetchAllCitiesData = async () => {
+    const object = await getCurrentWeatherForAllCities();
+    const map = {};
+    for (let city in object) {
+      map[city] = CityData.createCityData(object[city]);
+    }
+    return map;
+  };
+
+  fetchCityModelWithHistory = async city => {
     // This is hardcoded -- a better way would be to pass in a startDate
     // However, the specs said we want to look at exactly one week
     const startDate = new Date.now().setDate(new Date.now() - 7);
-    const jsonArr = await this.services.getHistoryForCity(city, startDate);
-    return City.createCityDataWithHistory(jsonArr)
-  }
+    const jsonArr = await getHistoryForCity(city, startDate);
+    return CityData.createCityDataWithHistory(jsonArr);
+  };
 
-  createDateRange = (startDate, endDate) => {
+  fetchDateRange = (startDate, endDate) => {
     return utils.getDates(startDate, endDate);
-  }
+  };
 }
