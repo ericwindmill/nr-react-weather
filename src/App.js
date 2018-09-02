@@ -6,6 +6,7 @@ import CityDisplay from "./components/city_display/city_display";
 import CityMenu from "./components/city_menu/city_menu";
 import Button from "@material-ui/core/Button";
 import Legend from "./components/legend/legend";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 class App extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class App extends Component {
     this.state = {
       selected: "San Francisco",
       celsius: true,
+      loading: false,
     };
   }
 
@@ -32,8 +34,9 @@ class App extends Component {
   }
 
   async handleChange(city, _) {
+    this.setState({ loading: true });
     await this.weatherBloc.updateChartData(city, this.state.celsius, true);
-    this.setState({ selected: city });
+    this.setState({ selected: city, loading: false });
   }
 
   handleDegreeToggle = async _ => {
@@ -49,14 +52,19 @@ class App extends Component {
     const { selected, celsius } = this.state;
     const { appState } = this.props;
     return appState.isLoading ? (
-      <h1>Loading</h1>
+      <LinearProgress />
     ) : (
       <div className="App">
+        {this.state.loading ? (
+          <LinearProgress />
+        ) : (
+          <div style={{ height: "5px" }} />
+        )}
         <CityMenu handleChange={this.handleChange.bind(this)} />
         <main className="content">
           <CityDisplay
             data={appState.state.current[selected]}
-            isCelcius={celsius}
+            isCelsius={celsius}
           />
           <BarChart
             title={"History"}

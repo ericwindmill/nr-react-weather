@@ -7,8 +7,7 @@ The goal of a Bloc is similar to the goal of a UI Component. This
 class can be reused by many different components/apps/etc.
 
 Notes about why services and blocs are separate:
-In this particular example, all I'm going is calling out to services,
-Which makes this bloc overkill. However, it will scale much better because
+it will scale much better because
 services, logic and components are decoupled.
  */
 

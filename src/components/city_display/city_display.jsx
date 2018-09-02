@@ -4,14 +4,14 @@ import "./city_display.css";
 
 export default class CityDisplay extends React.Component {
   render() {
-    const { data, isCelcius } = this.props;
+    const { data, isCelsius } = this.props;
     const { currentTempC, currentTempF, condition, conditionIcon } = data.state;
     const iconUrl = "https:" + conditionIcon;
     return (
       <Card classes={{ root: "city-display-root" }}>
         <img className="icon" src={iconUrl} alt="weather icon" />
         <h1 className="title">{data.title}</h1>
-        {isCelcius ? (
+        {isCelsius ? (
           <p className="temp">{`${currentTempC} ℃`}</p>
         ) : (
           <p className="temp">{`${currentTempF} ℉`}</p>
