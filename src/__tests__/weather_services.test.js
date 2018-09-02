@@ -1,5 +1,9 @@
 import * as utils from "../utils/date_utils";
 import * as services from "../services/weather_services";
+import "isomorphic-fetch";
+
+// isomorphic-fetch is required to run tests that call to
+// web api 'fetch' function
 
 describe("weather services", () => {
   it("makes http request", async () => {
@@ -8,16 +12,11 @@ describe("weather services", () => {
     // Will fail if there is an error in the request
     expect(data).toBeTruthy();
   });
-  it("gets data for all cities", async () => {
-    expect.assertions(2);
-    const data = await services.getCurrentWeatherForAllCities();
-    expect(data).toHaveProperty("San Francisco");
-    expect(data).toHaveProperty("Istanbul");
-  });
   it("gets previous week's data for a city", async () => {
     expect.assertions(1);
     const startDate = utils.oneWeekAgo();
-    const data = await services.getHistoryForCity("Paris", startDate);
+    const dateRange = utils.getDates(startDate, Date.now());
+    const data = await services.getHistoryForCity("Paris", dateRange);
     // data should be an array of 7 days.
     expect(data).toHaveLength(7);
   });

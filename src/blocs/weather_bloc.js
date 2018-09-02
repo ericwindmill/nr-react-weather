@@ -18,7 +18,6 @@ import {
 } from "../services/weather_services";
 import * as utils from "../utils/date_utils";
 import CityData from "../models/city";
-import { cities } from "../variables/general";
 
 export default class WeatherBloc {
   constructor(appState) {
@@ -41,7 +40,7 @@ export default class WeatherBloc {
     return CityData.createCityData(json);
   };
 
-  fetchAllCitiesData = async () => {
+  fetchAllCitiesData = async cities => {
     const map = {};
     for (let city in cities) {
       map[cities[city]] = await this.fetchSingleCityData(cities[city]);
@@ -54,7 +53,8 @@ export default class WeatherBloc {
     // However, the specs said we want to look at exactly one week
     const startDate = utils.oneWeekAgo();
     const current = await this.fetchSingleCityData(city);
-    const history = await getHistoryForCity(city, startDate);
+    const dateRange = this.fetchDateRange(startDate, Date.now());
+    const history = await getHistoryForCity(city, dateRange);
     return CityData.createCityDataWithHistory(history, current);
   };
 
@@ -122,11 +122,13 @@ export default class WeatherBloc {
       isCelsius,
     );
 
-    this.appState.updateAppState({
+    await this.appState.updateAppState({
       historyLabels: historyLabels,
       historySeries: historySeries,
       forecastLabels: forecastLabels,
       forecastSeries: forecastSeries,
     });
+
+    return this.appState;
   };
 }

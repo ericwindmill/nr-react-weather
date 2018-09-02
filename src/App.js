@@ -7,6 +7,7 @@ import CityMenu from "./components/city_menu/city_menu";
 import Button from "@material-ui/core/Button";
 import Legend from "./components/legend/legend";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import { cities } from "./variables/general";
 
 class App extends Component {
   constructor(props) {
@@ -15,12 +16,12 @@ class App extends Component {
     this.state = {
       selected: "San Francisco",
       celsius: true,
-      loading: false,
+      loading: true,
     };
   }
 
   async componentDidMount() {
-    let data = await this.weatherBloc.fetchAllCitiesData();
+    let data = await this.weatherBloc.fetchAllCitiesData(cities);
     this.props.appState.updateAppState({
       current: data,
     });
@@ -29,8 +30,8 @@ class App extends Component {
       this.state.celsius,
       true,
     );
-    // Tell react to re-render.
-    this.forceUpdate();
+    this.props.appState.isLoading = false;
+    this.setState({ loading: false });
   }
 
   async handleChange(city, _) {

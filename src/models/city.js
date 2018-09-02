@@ -3,7 +3,6 @@ export default class CityData {
     this.title = title;
     this.state = data;
   }
-
   // basic factory
   // All factories eventually call this
   // This parses through the json to get the

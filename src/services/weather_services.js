@@ -1,4 +1,4 @@
-import * as util from "../utils/date_utils";
+import "isomorphic-fetch";
 
 const options = {
   host: "https://api.apixu.com",
@@ -10,16 +10,16 @@ const options = {
 
 const _fetch = async query => {
   let url = options.host + query;
-  return fetch(url).then(response =>
-    response.json().catch(e => {
-      throw new Error(e);
-    }),
-  );
+  return await fetch(url)
+    .then(response => response.json())
+    .catch(e => {
+      console.log(e);
+    });
 };
 
 export const getCurrentWeatherByCity = async function getWeatherByCity(city) {
   let path = options.currentWeatherPath + city;
-  return _fetch(path);
+  return await _fetch(path);
 };
 
 export const getForecastForCity = async function getForecastForCity(
@@ -35,9 +35,8 @@ export const getForecastForCity = async function getForecastForCity(
 
 export const getHistoryForCity = async function getHistoryForCity(
   city,
-  startDate,
+  dateRange,
 ) {
-  const dateRange = util.getDates(startDate, Date.now());
   const results = [];
   for (let date in dateRange) {
     let query = options.historyPath + `${city}&dt=${dateRange[date]}`;
