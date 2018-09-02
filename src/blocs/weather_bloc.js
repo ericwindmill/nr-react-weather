@@ -13,25 +13,39 @@ services, logic and components are decoupled.
  */
 
 import {
-  getCurrentWeatherForAllCities,
   getHistoryForCity,
   getCurrentWeatherByCity,
   getForecastForCity,
 } from "../services/weather_services";
 import * as utils from "../utils/date_utils";
 import CityData from "../models/city";
+import { cities } from "../variables/general";
 
 export default class WeatherBloc {
+  constructor(appState) {
+    this.appState = appState;
+  }
   fetchSingleCityData = async city => {
+    // if we already have the data, don't pull in new data
+    // The catch here is that if the weather information changes,
+    // we want that update.
+    // This is a trade off that I was willing to make for two reasons:
+    // 1. Weather information doesn't update super quickly.
+    // 2. Because this app doesn't have persistance, it'll reload when
+    // the browser is refreshed.
+    // Given more time I would put some sort of timeout on this
+    // that forced a refresh
+    if (this.appState.haveCityData(city)) {
+      return this.appState.state.current[city];
+    }
     const json = await getCurrentWeatherByCity(city);
     return CityData.createCityData(json);
   };
 
   fetchAllCitiesData = async () => {
-    const object = await getCurrentWeatherForAllCities();
     const map = {};
-    for (let city in object) {
-      map[city] = CityData.createCityData(object[city]);
+    for (let city in cities) {
+      map[cities[city]] = await this.fetchSingleCityData(cities[city]);
     }
     return map;
   };
@@ -40,16 +54,80 @@ export default class WeatherBloc {
     // This is hardcoded -- a better way would be to pass in a startDate
     // However, the specs said we want to look at exactly one week
     const startDate = utils.oneWeekAgo();
-    const jsonArr = await getHistoryForCity(city, startDate);
-    return CityData.createCityDataWithHistory(jsonArr);
+    const current = await this.fetchSingleCityData(city);
+    const history = await getHistoryForCity(city, startDate);
+    return CityData.createCityDataWithHistory(history, current);
   };
 
   fetchCityModelWithForecast = async (city, numDays) => {
-    const data = await getForecastForCity(city, numDays)
-    return CityData.createCityDataWithForecast();
+    const data = await getForecastForCity(city, numDays);
+    return CityData.createCityDataWithForecast(data);
   };
 
   fetchDateRange = (startDate, endDate) => {
     return utils.getDates(startDate, endDate);
+  };
+
+  getHistoryDataForBarChart = (data, isCelsius) => {
+    const lows = [];
+    const avg = [];
+    const highs = [];
+    data.forEach(day => {
+      if (isCelsius) {
+        lows.push(Math.round(day.minC));
+        avg.push(Math.round(day.avgC));
+        highs.push(Math.round(day.maxC));
+      } else {
+        lows.push(Math.round(day.minF));
+        avg.push(Math.round(day.avgF));
+        highs.push(Math.round(day.maxF));
+      }
+    });
+    return [lows, avg, highs];
+  };
+
+  getDatesForBarChart = data => {
+    const dates = [];
+    data.forEach(day => {
+      let date = day.date;
+      // the labels for the bar chart will just be the date number
+      // dates are in the format 'yyyy-mm-dd' from the API.
+      dates.push(date.split("-")[2]);
+    });
+    return dates;
+  };
+
+  updateChartData = async (city, isCelsius, shouldFetchOnCitySwitch) => {
+    let forecast, history;
+    if (shouldFetchOnCitySwitch) {
+      forecast = await this.fetchCityModelWithForecast(city, 7);
+      history = await this.fetchCityModelWithHistory(city);
+      this.appState.updateAppState({
+        forecast: forecast,
+        history: history,
+      });
+    } else {
+      forecast = this.appState.state.forecast;
+      history = this.appState.state.history;
+    }
+
+    const historyLabels = this.getDatesForBarChart(history.state.history);
+    const historySeries = this.getHistoryDataForBarChart(
+      history.state.history,
+      isCelsius,
+    );
+
+    const forecastLabels = this.getDatesForBarChart(forecast.state.forecast);
+    const forecastSeries = this.getHistoryDataForBarChart(
+      forecast.state.forecast,
+      isCelsius,
+    );
+
+    this.appState.updateAppState({
+      historyLabels: historyLabels,
+      historySeries: historySeries,
+      forecastLabels: forecastLabels,
+      forecastSeries: forecastSeries,
+    });
   };
 }

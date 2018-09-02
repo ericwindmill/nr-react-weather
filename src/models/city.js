@@ -25,50 +25,46 @@ export default class CityData {
 
   // Factory for class when you want the cities weather history;
   // JsonArr is a list of json objects -- one for each day.
-  static createCityDataWithHistory = jsonArr => {
+  static createCityDataWithHistory = (dataObject, cityDataObject) => {
     // create the basic object
-    let cityData = CityData.createCityData(jsonArr[0]);
-    cityData.state.history = [];
-    jsonArr.forEach(d => {
-      d = JSON.parse(d);
-      let historyDay = d["forecast"]["forecastDay"][0];
-      cityData.state.history.push({
-        date: historyDay["date"],
+    cityDataObject.state.history = [];
+    dataObject.forEach(d => {
+      let historyDay = d.forecast.forecastday[0].day;
+      cityDataObject.state.history.push({
+        date: d.forecast.forecastday[0].date,
         maxC: historyDay["maxtemp_c"],
-        maxT: historyDay["maxtemp_c"],
-        minC: historyDay["maxtemp_c"],
-        minT: historyDay["maxtemp_c"],
-        avgC: historyDay["maxtemp_c"],
-        avgT: historyDay["maxtemp_c"],
-        condition: historyDay["condition"]["text"],
-        conditionIcon: historyDay["condition"]["icon"],
+        maxF: historyDay["maxtemp_f"],
+        minC: historyDay["mintemp_c"],
+        minF: historyDay["mintemp_f"],
+        avgC: historyDay["avgtemp_c"],
+        avgF: historyDay["avgtemp_f"],
+        condition: historyDay.condition.text,
+        conditionIcon: historyDay.condition.icon,
       });
     });
 
-    return cityData;
+    return cityDataObject;
   };
 
   // Factory for CityData when you want to build it with cities
   // forecasted weather data.
-  static createCityDataWithForecast = json => {
+  static createCityDataWithForecast = dataObject => {
     // create the basic object
-    let cityData = CityData.createCityData(json);
-    let object = JSON.parse(json);
+    let cityData = CityData.createCityData(dataObject);
     cityData.state.forecast = [];
-
     // An array of the forecasted days
-    let forecastDayArray = object["forecast"]["forecastDay"];
+    let forecastDayArray = dataObject.forecast.forecastday;
     forecastDayArray.forEach(day => {
       cityData.state.forecast.push({
-        date: day["date"],
-        maxC: day["maxtemp_c"],
-        maxT: day["maxtemp_c"],
-        minC: day["maxtemp_c"],
-        minT: day["maxtemp_c"],
-        avgC: day["maxtemp_c"],
-        avgT: day["maxtemp_c"],
-        condition: day["condition"]["text"],
-        conditionIcon: day["condition"]["icon"],
+        date: day.date,
+        maxC: day.day["maxtemp_c"],
+        maxF: day.day["maxtemp_f"],
+        minC: day.day["mintemp_c"],
+        minF: day.day["mintemp_f"],
+        avgC: day.day["avgtemp_c"],
+        avgF: day.day["avgtemp_f"],
+        condition: day.day.condition.text,
+        conditionIcon: day.day.condition.icon,
       });
     });
 

@@ -11,11 +11,18 @@ export const getDates = function(startDate, endDate) {
       date.setDate(date.getDate() + days);
       return date;
     },
+    // pad single digits days/months to 01 rather than 1
+    pad = function(int) {
+      return int < 10 ? `0${int}` : int;
+    },
     // Grabbing the dates we need in the format that the
     // Weather API expects
     parseDate = function() {
       const date = new Date(this.valueOf());
-      return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      // Months start at 0, so add one.
+      const month = pad.call(currentDate, date.getMonth() + 1);
+      const day = pad.call(currentDate, date.getDate());
+      return `${date.getFullYear()}-${month}-${day}`;
     };
   while (currentDate <= endDate) {
     dates.push(parseDate.call(currentDate));
@@ -26,5 +33,8 @@ export const getDates = function(startDate, endDate) {
 
 export const oneWeekAgo = () => {
   const today = new Date();
-  return new today.setDate(today.getDate() - 7);
+  const prev = today.setDate(today.getDate() - 6);
+  // prev will be UTC seconds from epoch
+  // passing it to a new date returns a human readable version
+  return new Date(prev);
 };

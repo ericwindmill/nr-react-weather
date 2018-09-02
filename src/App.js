@@ -1,32 +1,86 @@
 import React, { Component } from "react";
 import "./App.css";
 import WeatherBloc from "./blocs/weather_bloc";
-import CityTabs from "./components/city_tabs";
-import * as vars from "./variables/general";
+import BarChart from "./components/bar_charts/bar_chart";
+import CityDisplay from "./components/city_display/city_display";
+import CityMenu from "./components/city_menu/city_menu";
+import Button from "@material-ui/core/Button";
+import Legend from "./components/legend/legend";
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.weatherBloc = new WeatherBloc();
+    this.weatherBloc = new WeatherBloc(this.props.appState);
+    this.state = {
+      selected: "San Francisco",
+      celsius: true,
+    };
   }
 
   async componentDidMount() {
     let data = await this.weatherBloc.fetchAllCitiesData();
-    this.props.appState.updateAppState(data);
-    // Tell react to re-render;
+    this.props.appState.updateAppState({
+      current: data,
+    });
+    await this.weatherBloc.updateChartData(
+      this.state.selected,
+      this.state.celsius,
+      true,
+    );
+    // Tell react to re-render.
     this.forceUpdate();
   }
 
+  async handleChange(city, _) {
+    await this.weatherBloc.updateChartData(city, this.state.celsius, true);
+    this.setState({ selected: city });
+  }
+
+  handleDegreeToggle = async _ => {
+    await this.weatherBloc.updateChartData(
+      this.state.selected,
+      !this.state.celsius,
+      false,
+    );
+    this.setState({ celsius: !this.state.celsius });
+  };
+
   render() {
-    let isLoading = this.props.appState.isLoading ? (
+    const { selected, celsius } = this.state;
+    const { appState } = this.props;
+    return appState.isLoading ? (
       <h1>Loading</h1>
     ) : (
       <div className="App">
-        <CityTabs cities={vars.cities} />
+        <CityMenu handleChange={this.handleChange.bind(this)} />
+        <main className="content">
+          <CityDisplay
+            data={appState.state.current[selected]}
+            isCelcius={celsius}
+          />
+          <BarChart
+            title={"History"}
+            labels={appState.state.historyLabels}
+            isCelsius={celsius}
+            series={appState.state.historySeries}
+            high={celsius ? 30 : 100}
+          />
+          <BarChart
+            title={"Forecast"}
+            labels={appState.state.forecastLabels}
+            isCelsius={celsius}
+            series={appState.state.forecastSeries}
+            high={celsius ? 30 : 100}
+          />
+          <div className="footer">
+            <Legend />
+            <Button variant="contained" onClick={this.handleDegreeToggle}>
+              {this.state.celsius ? "Toggle to ℉" : "Toggle to ℃"}
+            </Button>
+          </div>
+        </main>
       </div>
     );
-
-    return isLoading;
   }
 }
 

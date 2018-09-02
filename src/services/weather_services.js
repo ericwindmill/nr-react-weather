@@ -1,5 +1,4 @@
 import * as util from "../utils/date_utils";
-import { cities } from "../variables/general";
 
 const options = {
   host: "https://api.apixu.com",
@@ -23,15 +22,6 @@ export const getCurrentWeatherByCity = async function getWeatherByCity(city) {
   return _fetch(path);
 };
 
-export const getCurrentWeatherForAllCities = async function getWeatherForAllCities() {
-  const allCitiesWeather = {};
-  for (let city in cities) {
-    let query = options.currentWeatherPath + cities[city];
-    allCitiesWeather[cities[city]] = await _fetch(query);
-  }
-  return allCitiesWeather;
-};
-
 export const getForecastForCity = async function getForecastForCity(
   city,
   forecastDays,
@@ -47,14 +37,12 @@ export const getHistoryForCity = async function getHistoryForCity(
   city,
   startDate,
 ) {
-  if (parseInt(startDate.split("-")[0]) < 2015) {
-    throw new Error("The oldest data available is from 2015");
-  }
-  const dateRange = util.getDates(startDate, new Date.now());
+  const dateRange = util.getDates(startDate, Date.now());
   const results = [];
   for (let date in dateRange) {
-    let query = options.historyPath + `${city}&days=${dateRange[date]}`;
-    results.push(_fetch(query));
+    let query = options.historyPath + `${city}&dt=${dateRange[date]}`;
+    let response = await _fetch(query);
+    results.push(response);
   }
   return results;
 };

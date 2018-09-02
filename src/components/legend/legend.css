@@ -1,0 +1,25 @@
+.legend-root {
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: baseline;
+}
+
+.legend-line {
+  width: 25px;
+  height: 10px;
+}
+
+.high {
+  color: #f4c63d;
+  background: #f4c63d;
+}
+.avg {
+  color: #f05b4f;
+  background: #f05b4f;
+}
+
+.low {
+  color: #d70206;
+  background: #d70206;
+}

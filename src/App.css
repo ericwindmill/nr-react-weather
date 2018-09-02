@@ -1,6 +1,25 @@
 .App {
-  padding: 100px;
-  background: rgba(255, 255, 255, 0.7);
   text-align: center;
   height: 100vh;
+  /*Make room for the drawer*/
+  position: absolute;
+  left: 169px;
+  top: 0;
+  width: calc(100% - 169px);
+  max-width: 500px;
+}
+
+.content {
+  margin: 50px;
+  display: flex;
+  flex-flow: column;
+}
+
+.content > * {
+  margin-bottom: 12px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
 }

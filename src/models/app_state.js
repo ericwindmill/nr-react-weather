@@ -5,12 +5,21 @@ const merge = require("lodash.merge");
 
 export default class AppState {
   constructor() {
-    this.state = {};
+    // all the data from the api
+    this.state = {
+      current: {},
+      history: {},
+      forecast: {},
+    };
     this.isLoading = true;
   }
 
   updateAppState = newState => {
     this.state = merge(this.state, newState);
     this.isLoading = false;
+  };
+
+  haveCityData = city => {
+    return this.state.current.hasOwnProperty(city);
   };
 }
