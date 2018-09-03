@@ -2,7 +2,7 @@
 
 ### run
 ```
-git pull origin ``
+git pull origin https://github.com/ericwindmill/nr-react-weather.git
 npm install
 npm start
 ```
@@ -13,3 +13,4 @@ npm start
 npm test
 ```
 
+--- 

@@ -10,7 +10,6 @@ Notes about why services and blocs are separate:
 it will scale much better because
 services, logic and components are decoupled.
  */
-
 import {
   getHistoryForCity,
   getCurrentWeatherByCity,
@@ -26,13 +25,12 @@ export default class WeatherBloc {
   fetchSingleCityData = async city => {
     // if we already have the data, don't pull in new data
     // The catch here is that if the weather information changes,
-    // we want that update.
+    // and we want that update.
     // This is a trade off that I was willing to make for two reasons:
-    // 1. Weather information doesn't update super quickly.
-    // 2. Because this app doesn't have persistance, it'll reload when
-    // the browser is refreshed.
-    // Given more time I would put some sort of timeout on this
-    // that forced a refresh
+    // 1. Weather information doesn't update super quickly in a significant way
+    // 2. Because this app doesn't have persistence, it'll reload when the browser is refreshed.
+    // Given more time I would put some sort of time limit on this
+    // that forced a refresh every so often
     if (this.appState.haveCityData(city)) {
       return this.appState.state.current[city];
     }

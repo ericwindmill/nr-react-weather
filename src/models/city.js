@@ -3,10 +3,8 @@ export default class CityData {
     this.title = title;
     this.state = data;
   }
-  // basic factory
   // All factories eventually call this
-  // This parses through the json to get the
-  // data we really want.
+  // This simply creates a model of the data we really want from the api.
   //
   // In this sample project, this may be over kill,
   // but i'd argue that its a good idea for a "real" project.
@@ -22,10 +20,9 @@ export default class CityData {
     return new CityData(title, cityData);
   };
 
-  // Factory for class when you want the cities weather history;
-  // JsonArr is a list of json objects -- one for each day.
+  // Factory for class when you want the city's weather history
+  // dataObject in this case is an array of daily data
   static createCityDataWithHistory = (dataObject, cityDataObject) => {
-    // create the basic object
     cityDataObject.state.history = [];
     dataObject.forEach(d => {
       let historyDay = d.forecast.forecastday[0].day;
@@ -45,13 +42,12 @@ export default class CityData {
     return cityDataObject;
   };
 
-  // Factory for CityData when you want to build it with cities
-  // forecasted weather data.
+  // Factory for CityData when you want to build it with city's
+  // forecast weather data.
   static createCityDataWithForecast = dataObject => {
-    // create the basic object
     let cityData = CityData.createCityData(dataObject);
     cityData.state.forecast = [];
-    // An array of the forecasted days
+    // An array of the forecast days
     let forecastDayArray = dataObject.forecast.forecastday;
     forecastDayArray.forEach(day => {
       cityData.state.forecast.push({
