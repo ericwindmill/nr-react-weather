@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8cb4cfc8-35fe-4096-82e3-f232b30bb4d4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/__tests__/weather_bloc.test.js" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/date_utils.test.js" afterPath="$PROJECT_DIR$/src/__tests__/date_utils.test.js" />
-      <change beforePath="$PROJECT_DIR$/src/__tests__/weather_services.test.js" afterPath="$PROJECT_DIR$/src/__tests__/weather_services.test.js" />
-      <change beforePath="$PROJECT_DIR$/src/blocs/weather_bloc.js" afterPath="$PROJECT_DIR$/src/blocs/weather_bloc.js" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" afterPath="$PROJECT_DIR$/src/index.js" />
-      <change beforePath="$PROJECT_DIR$/src/models/app_state.js" afterPath="$PROJECT_DIR$/src/models/app_state.js" />
-      <change beforePath="$PROJECT_DIR$/src/models/city.js" afterPath="$PROJECT_DIR$/src/models/city.js" />
-      <change beforePath="$PROJECT_DIR$/src/routes/cities.jsx" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/services/weather_services.js" afterPath="$PROJECT_DIR$/src/services/weather_services.js" />
+      <change beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -38,6 +28,23 @@
   <component name="CoverageOptionsProvider">
     <option name="myAddOrReplace" value="0" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="120">
+                <caret line="5" column="11" lean-forward="true" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>services</find>
@@ -57,7 +64,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/variables/general.js" />
         <option value="$PROJECT_DIR$/src/components/city_tabs.css" />
         <option value="$PROJECT_DIR$/src/components/city_tabs.jsx" />
@@ -85,6 +91,7 @@
         <option value="$PROJECT_DIR$/src/models/app_state.js" />
         <option value="$PROJECT_DIR$/src/blocs/weather_bloc.js" />
         <option value="$PROJECT_DIR$/src/__tests__/weather_bloc.test.js" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -295,7 +302,7 @@
       <updated>1535757091727</updated>
       <workItem from="1535757093920" duration="323000" />
       <workItem from="1535757764376" duration="208000" />
-      <workItem from="1535812754734" duration="54122000" />
+      <workItem from="1535812754734" duration="54317000" />
     </task>
     <servers />
   </component>
@@ -332,7 +339,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54653000" />
+    <option name="totallyTimeSpent" value="54848000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-240" y="-1080" width="1920" height="1080" extended-state="0" />
@@ -394,17 +401,6 @@
         <state relative-caret-position="180">
           <caret line="15109" column="35" lean-forward="false" selection-start-line="15109" selection-start-column="35" selection-end-line="15109" selection-end-column="35" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="168">
-            <caret line="7" column="10" lean-forward="true" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-            <folding />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -694,6 +690,17 @@
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="120">
+            <caret line="5" column="11" lean-forward="true" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
